@@ -53,7 +53,7 @@ public class AnnonceServices {
 	public Annonce getById(int id) {
 		try {
 			Connection con = UtileConnection.seConnecter();
-			String query = "SELECT * FROM annonces WHERE id= ?;";
+			String query = "SELECT * FROM annonces WHERE annonce_id= ?;";
 			   PreparedStatement stmt = con.prepareStatement(query);
 			   stmt.setInt(1, id);
 			   stmt.executeQuery();
@@ -79,23 +79,23 @@ public class AnnonceServices {
 		
 	}
 	
-	public Annonce getByUser_id(int user_id) {
+	public Annonce getByUser_id(int annonce_id) {
 		try {
 			Connection con = UtileConnection.seConnecter();
-			String query = "SELECT * FROM annonces WHERE user_id= ?;";
+			String query = "SELECT * FROM annonces WHERE annonce_id= ?;";
 			   PreparedStatement stmt = con.prepareStatement(query);
-			   stmt.setInt(1, user_id);
+			   stmt.setInt(1, annonce_id);
 			   stmt.executeQuery();
 			ResultSet resultSet = stmt.executeQuery();
 			while (resultSet.next()) {
-				//int id = resultSet.getInt("id");
+				int user_id = resultSet.getInt("user_id");
 				String type = resultSet.getString("type");
 				String type_produit = resultSet.getString("type_produit");
 				String nom = resultSet.getString("nom");
 				String description = resultSet.getString("description");
 				String url_photos = resultSet.getString("url_photos");
 				int prix = resultSet.getInt("prix");
-				Annonce a = new Annonce(user_id, type, type_produit, nom, description, prix,url_photos);
+				Annonce a = new Annonce(annonce_id, user_id, type, type_produit, nom, description, prix,url_photos);
 			   return a;
 			}
 			resultSet.close();
@@ -150,12 +150,12 @@ public class AnnonceServices {
 		}
 	}
 	
-	public void delete(int id) {
+	public void delete(int annonce_id) {
 		try {
 			Connection con = UtileConnection.seConnecter();
-			String query = "DELETE FROM annonces WHERE id=?;";
+			String query = "DELETE FROM annonces WHERE annonce_id=?;";
 			PreparedStatement st = con.prepareStatement(query);
-			st.setInt(1, id);
+			st.setInt(1, annonce_id);
 			st.executeUpdate();
 			
 			con.close();

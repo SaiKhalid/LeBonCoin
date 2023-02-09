@@ -16,8 +16,12 @@
 <h1>Creer une Annonce :</h1>
 <label for="user_id">UserId ${user.id}</label><br>
 <input name="user_id" type="number" value='<%= session.getAttribute("id") %>'><br><br>
-<label for="type">Type d'annonce (Vente/Service)</label><br>
-<input name="type" type="text"><br><br>
+<label for="type">Type d'annonce </label><br>
+<!--<input name="type" type="text"><br><br>-->
+ <select id="type" name="type">
+                <option value="vente">Vente</option>
+                <option value="annonce">Annonce</option>
+</select><br><br>
 <span> ${usernameError} </span> <br>
 <label for="type_produit">Type du produit</label><br>
 <input name="type_produit" type="text"><br><br>
